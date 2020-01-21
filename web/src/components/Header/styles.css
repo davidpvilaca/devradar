@@ -1,0 +1,26 @@
+header.app-header {
+  display: flex;
+  flex: 1;
+  background-color: #fff;
+  padding: 10px 20px;
+  height: 70px;
+  align-items: center;
+}
+
+header.app-header span.logo-name {
+  flex: 1;
+  font-weight: 600;
+  color: #6931ca;
+  cursor: pointer;
+  transition: color .5s;
+  font-size: 1.4rem;
+}
+
+header.app-header span.logo-name:hover {
+  color: #8244ee;
+}
+
+header.app-header a {
+  text-decoration: none;
+  font-weight: 600;
+}
