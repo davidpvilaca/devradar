@@ -36,5 +36,9 @@
   },
   "resolutions": {
     "serialize-javascript": "^2.1.1"
+  },
+  "engines": {
+    "node": "^12.10.0",
+    "yarn": "^1.10.0"
   }
 }
