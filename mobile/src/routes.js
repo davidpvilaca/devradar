@@ -1,8 +1,8 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
-import Main from './pages/Main';
-import Profile from './pages/Profile';
+import Main from './pages/Main'
+import Profile from './pages/Profile'
 
 const Routes = createAppContainer(
   createStackNavigator({
@@ -10,23 +10,23 @@ const Routes = createAppContainer(
       screen: Main,
       navigationOptions: {
         title: 'DevRadar'
-      },
+      }
     },
     Profile: {
       screen: Profile,
       navigationOptions: {
         title: 'Perfil no Github'
-      },
-    },
+      }
+    }
   }, {
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#7D40E7'
       },
       headerTintColor: '#FFF',
-      headerBackTitleVisible: false,
-    },
+      headerBackTitleVisible: false
+    }
   })
-);
+)
 
-export default Routes;
+export default Routes

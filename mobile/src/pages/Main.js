@@ -1,73 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import { StyleSheet, Image, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import MapView, { Marker, Callout } from 'react-native-maps'
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
+import { MaterialIcons } from '@expo/vector-icons'
 
-import api from '../services/api';
-import * as socket from '../services/socket';
+import api from '../services/api'
+import * as socket from '../services/socket'
 
-export default function Main({ navigation }) {
-  const [devs, setDevs] = useState([]);
-  const [currentRegion, setCurrentRegion] = useState(null);
-  const [techs, setTechs] = useState('');
+export default function Main ({ navigation }) {
+  const [devs, setDevs] = useState([])
+  const [currentRegion, setCurrentRegion] = useState(null)
+  const [techs, setTechs] = useState('')
 
   useEffect(() => {
-    async function loadInitialPosition() {
-      const { granted } = await requestPermissionsAsync();
+    async function loadInitialPosition () {
+      const { granted } = await requestPermissionsAsync()
 
       if (granted) {
         const { coords } = await getCurrentPositionAsync({
-          enableHighAccuracy: true,
-        });
+          enableHighAccuracy: true
+        })
 
-        const { latitude, longitude } = coords;
+        const { latitude, longitude } = coords
 
         setCurrentRegion({
           latitude,
           longitude,
           latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        });
+          longitudeDelta: 0.03
+        })
       }
     }
 
-    loadInitialPosition();
-  }, []);
+    loadInitialPosition()
+  }, [])
 
   useEffect(() => {
     socket.subscribeToNewDev(dev => {
-      setDevs([...devs, dev]);
-    });
-  }, [devs]);
+      setDevs([...devs, dev])
+    })
+  }, [devs])
 
-  function setupWebsocket() {
-    socket.disconnect();
-    const { latitude, longitude } = currentRegion;
-    socket.connect({ latitude, longitude, techs });
+  function setupWebsocket () {
+    socket.disconnect()
+    const { latitude, longitude } = currentRegion
+    socket.connect({ latitude, longitude, techs })
   }
 
-  async function loadDevs() {
-    const { latitude, longitude } = currentRegion;
+  async function loadDevs () {
+    const { latitude, longitude } = currentRegion
 
     const { data } = await api.get('/search', {
       params: {
         latitude,
         longitude,
-        techs,
+        techs
       }
     })
 
-    setDevs(data);
-    setupWebsocket();
+    setDevs(data)
+    setupWebsocket()
   }
 
-  function handleRegionChange(region) {
-    setCurrentRegion(region);
+  function handleRegionChange (region) {
+    setCurrentRegion(region)
   }
 
   if (!currentRegion) {
-    return null;
+    return null
   }
 
   return (
@@ -110,7 +111,7 @@ export default function Main({ navigation }) {
         </TouchableOpacity>
       </View>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -122,21 +123,21 @@ const styles = StyleSheet.create({
     height: 54,
     borderRadius: 4,
     borderWidth: 4,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   callout: {
-    width: 260,
+    width: 260
   },
   devName: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 16
   },
   devBio: {
     color: '#666',
-    marginTop: 5,
+    marginTop: 5
   },
   devTechs: {
-    marginTop: 5,
+    marginTop: 5
   },
 
   searchForm: {
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
     zIndex: 5,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
 
   searchInput: {
@@ -160,9 +161,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: {
       width: 4,
-      height: 4,
+      height: 4
     },
-    elevation: 2,
+    elevation: 2
   },
 
   loadButton: {
@@ -172,6 +173,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 15,
-  },
-});
+    marginLeft: 15
+  }
+})
+
+Main.propTypes = {
+  navigation: PropTypes.object
+}
