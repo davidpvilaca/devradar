@@ -16,7 +16,7 @@ app.use(cors())
 app.use(express.json())
 app.use(routes)
 
-server.listen(PORT || 3333)
+server.listen(PORT || 3333, () => console.log(`The application started on port ${PORT || 3333}`))
 
 module.exports = {
   app,
