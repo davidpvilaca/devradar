@@ -7,10 +7,10 @@
 </h4>
 
 <p align="center">
-  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;|&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;|&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#Tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;
+  <a href="#Projeto">Projeto</a>&nbsp;&nbsp;|&nbsp;
+  <a href="#Layout">Layout</a>&nbsp;&nbsp;|&nbsp;
+  <a href="#Licença">Licença</a>
 </p>
 
 <br>
