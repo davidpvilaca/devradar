@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import './styles.css'
 
-export default function DevItem({ dev }) {
+export default function DevItem ({ dev }) {
   return (
     <li className="dev-item">
       <header>
@@ -16,4 +17,8 @@ export default function DevItem({ dev }) {
       <a target="_blank" rel="noopener noreferrer" href={`https://github.com/${dev.github_username}`}>Acessar perfil no Github</a>
     </li>
   )
+}
+
+DevItem.propTypes = {
+  dev: PropTypes.object
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
-export default function DevForm({ onSubmit }) {
-  const [github_username, setGithubUsername] = useState('')
+export default function DevForm ({ onSubmit }) {
+  const [githubUsername, setGithubUsername] = useState('')
   const [techs, setTechs] = useState('')
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
@@ -9,7 +10,7 @@ export default function DevForm({ onSubmit }) {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } = position.coords;
+        const { latitude, longitude } = position.coords
 
         setLatitude(latitude)
         setLongitude(longitude)
@@ -23,11 +24,11 @@ export default function DevForm({ onSubmit }) {
     )
   })
 
-  async function handleSubmit(e) {
+  async function handleSubmit (e) {
     e.preventDefault()
 
     await onSubmit({
-      github_username,
+      github_username: githubUsername,
       techs,
       latitude,
       longitude
@@ -45,7 +46,7 @@ export default function DevForm({ onSubmit }) {
           name="github_username"
           id="github_username"
           required
-          value={github_username}
+          value={githubUsername}
           onChange={e => setGithubUsername(e.target.value)}
         />
       </div>
@@ -90,4 +91,8 @@ export default function DevForm({ onSubmit }) {
       <button type="submit">Salvar</button>
     </form>
   )
+}
+
+DevForm.propTypes = {
+  onSubmit: PropTypes.func
 }

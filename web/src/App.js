@@ -10,11 +10,11 @@ import Header from './components/Header'
 import DevForm from './components/DevForm'
 import DevItem from './components/DevItem'
 
-export default function App() {
+export default function App () {
   const [devs, setDevs] = useState([])
 
   useEffect(() => {
-    async function loadDevs() {
+    async function loadDevs () {
       const response = await api.get('/devs')
 
       setDevs(response.data)
@@ -23,7 +23,7 @@ export default function App() {
     loadDevs()
   }, [])
 
-  async function handleAddDev(data) {
+  async function handleAddDev (data) {
     const response = await api.post('/devs', data)
 
     setDevs([...devs, response.data])
