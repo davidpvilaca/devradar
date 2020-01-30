@@ -1,24 +1,24 @@
-const express = require('express');
-const cors = require('cors');
-const http = require('http');
-const routes = require('./routes');
-const { setupWebSocket } = require('./websocket');
-const { connectDb, PORT } = require('./config');
+const express = require('express')
+const cors = require('cors')
+const http = require('http')
+const routes = require('./routes')
+const { setupWebSocket } = require('./websocket')
+const { connectDb, PORT } = require('./config')
 
-connectDb();
+connectDb()
 
-const app = express();
-const server = http.Server(app);
+const app = express()
+const server = http.Server(app)
 
-setupWebSocket(server);
+setupWebSocket(server)
 
-app.use(cors());
-app.use(express.json());
-app.use(routes);
+app.use(cors())
+app.use(express.json())
+app.use(routes)
 
-server.listen(PORT || 3333);
+server.listen(PORT || 3333)
 
 module.exports = {
   app,
-  server,
-};
+  server
+}
